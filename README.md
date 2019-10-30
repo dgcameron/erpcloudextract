@@ -35,7 +35,7 @@ OTBI is a BI platform on top of ERP Cloud.  It consists of a metadata layer (bin
 https://www.ateam-oracle.com/using-data-sync-to-load-data-from-fusionsaas-using-bicc-and-ucm
 https://www.ateam-oracle.com/set-up-oracle-fusion-saas-business-intelligence-cloud-connector-bicc-to-use-oracle-cloud-infrastructure-oci-object-storage
 
-- Extract to UCM (now called Oracle Webcenter Content Server), Cloud Storage Service (Classic), or OCI Object Storage
+- Extract to UCM (now called Oracle Webcenter Content Server), Cloud Storage Service (Classic), or OCI Object Storage.  Note Oracle Storage Service Classic is not recommended and will not be discussed further in these notes.
 - Steps
     - Add offering.
     - Add a datastore for an offering (View Object).
@@ -46,11 +46,11 @@ https://www.ateam-oracle.com/set-up-oracle-fusion-saas-business-intelligence-clo
 - Next Steps:
     - UCM:  
         - Download files through the UI (File Import\Export UI or Traditional UCM UI).  See https://blogs.oracle.com/fusionhcmcoe/oracle-hcm-cloud-introduction-to-ucm-webcenter-content-server.
+        - Datasync: Option to pull data from UCM and load to any Oracle or non-Oracle database.  See below for more details.
         - You may also use web services to automate the file transfer to\from UCM. It supports both RIDC and Generic Soap Port. We recommend using Generic SOAP Port service for UCM automation.
             - Option1: Command line- You can use the WebCenter Content Document Transfer Utility via command line\shell\batch scripts to automate the file transfer.
             - Option2: Java Programs- You can use the Webcenter Content Document Transfer utility and invoke it via java or use the API wrapper.
     - OCI Object Storage:  Download available through the cloud console, or use the OCI API.
-    - Datasync: Option to pull data from UCM and load to any Oracle or non-Oracle database.  See below for more details.
     - ODI: ETL platform that can pull data from UCM or Object Storage and load into an Oracle or non-Oracle database.  See below for more details.
     - Use some other tool to pull data from storage (or scripts).
 
