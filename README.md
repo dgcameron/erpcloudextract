@@ -1,264 +1,110 @@
-# ODI on JCS Install and Config Notes
+# Options for Extracting Data Out of ERP Cloud and Optionally Loading into Oracle Analytics Cloud
 
 Derrick Cameron
-Mar 8, 2019
-
-This are some notes to help you through the installation and configuration of ODI on JCS.  This requires a database.  It was tested on 12.1, but should work on 12.2 (Classic and OCI).  There are some differences when using DB Classic versus OCI, but this is just in the beginning.  
-
-### **Create a DBCS Service (Classic or OCI)**
-
-Not documented, but straightforward.  Be sure to select backup.
-
-If the Database is on OCI or ADW/ATP you need to create the following policies.
-
-OCI: 
-
-```
-Allow service PSM to inspect database-family in compartment <compartment_name>
-Allow service PSM to inspect database-family in compartment <compartment_name>
-Allow service PSM to inspect vcns in compartment <compartment_name>
-Allow service PSM to use subnets in compartment <compartment_name>
-Allow service PSM to use vnics in compartment <compartment_name>
-Allow service PSM to manage security-lists in compartment <compartment_name>
-Allow service PSM to manage all-resources in compartment <compartment_name>
-
-Click on button “Create” at the bottom of the screen
-```
-
-ADW: 
-
-`Allow service PSM to inspect autonomous-database in compartment <compartment_name>`
-
-### **Create JCS**
-
-If using DB on OCI, first apply [this patch](https://support.oracle.com/epmos/faces/DocContentDisplay?_afrLoop=500232808913353&id=2434657.1&_afrWindowMode=0&_adf.ctrl-state=1p33fhsy9_9) to JCS.
-
-**Be sure to select the availability domain if the DB is on OCI**
+Oct 30, 2019
 
 ![](images/001.png)
 
-You should see something similar to this:
+The extraction of data from ERP cloud involves a few steps, and for each step there are some choices.  However the initial extract can only be done either using Integration Cloud Service (ICS) or Oracle Transactional Business Intelligence (OTBI) View Objects.  All options are noted below for completeness, and to address possible questions on these options.
 
-```
-Jan 17, 2019 10:32:59 PM UTC	Activity Submitted
-Jan 17, 2019 10:33:03 PM UTC	Activity Started
-Jan 17, 2019 10:33:05 PM UTC	Started operation to create service [JCSODICS] in identity domain [idcs-a8db2211d48045aa9bbc9f93fe2475bf].
-Jan 17, 2019 10:33:06 PM UTC	Creating resources [jcsodics-wls-1] for service [JCSODICS].
-Jan 17, 2019 10:39:14 PM UTC	Completed creating service [JCSODICS] resources in domain [idcs-a8db2211d48045aa9bbc9f93fe2475bf].
-Jan 17, 2019 10:41:27 PM UTC	Started operation to check provisioning status on the VMs for [WLS]
-Jan 17, 2019 10:49:57 PM UTC	Provisioning Succeeded on host(s): jcsodics-wls-1
-Jan 17, 2019 10:49:57 PM UTC	Provisioning of component [WLS] succeeded.
-Jan 17, 2019 10:50:40 PM UTC	Activity Ended
-```
+### **High level approach**
 
-### **Setup JCS Desktop**
+- Use ICS (not recommended)
+- Use OTBI with
+    - OTBI Reports (not recommended)
+    - or BI Cloud Connector (BICC) with:
+        - OAC Data Flows (not recommended)
+        - or BICC with Datasync (not recommended)
+        - or BICC and Oracle Data Integrator (ODI) or some other ETL or scripted tool. (recommended)
 
-These instructions follow [this documentation](https://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/javaservice/JCS/FMW_UpperStack_on_JCS/odi_on_jcs_obe/provisioning_oracle_data_integrator_cloud_service.html#section1).
+### **ICS (not recommended)**
 
-- ssh into the image with your private key and enter the following:
+ICS is generally a transaction integration platform, and while ICS supports bulk transaction extracts, this is not recommended for large data sets.  ICS can chunk data, but the technology is better suited to real time transaction integration.  Therefore this option will not be detailed in this document.
 
-`sudo killall gnome-screensaver`
+### **OTBI Options**
 
-- Add access rule - open 5901 (WLS_ADMIN)
+OTBI is a BI platform on top of ERP Cloud.  It consists of a metadata layer (binary formatted rpd file) where View Objects representing subject area content are used to access the underlying data, and a web query front end for direct access to transactional data.  View Objects are not documented so the end user must search using key words.  Regardless whether you use the OTBI web dashboards/reporting tool or other options (noted below), these all use View Objects in OTBI.
 
-![](images/002.png)
+#### OTBI Reports:
 
-- Open firewall (actually not sure this is required).
+- Extract data using an analysis created in Answers - 65k row limit.
+- Extract based on the SQL from the 'Advanced' tab of an Analyses Report.  There is no 65k row limit and no dependency on an answers report, but does require you to create sql queries.
+- Extract based on a Folder from a Subject Area from the /analytics portal.  No 65k row limit and provides allows mappings for multiple Subject Area folders to be created in one step, but is limited to the folder.
+- Extract using a BI Publisher report.
 
-```
-sudo sed -i 's/IPTABLES_SAVE_ON_RESTART="no"/IPTABLES_SAVE_ON_RESTART="yes"/g' /etc/sysconfig/iptables-config
-sudo iptables -I INPUT -p tcp -m tcp --dport 5901 -j ACCEPT
-sudo service iptables restart
-```
+BICC:
 
-- Set the vnc password and start the server:
+    https://www.ateam-oracle.com/using-data-sync-to-load-data-from-fusionsaas-using-bicc-and-ucm
+    https://www.ateam-oracle.com/set-up-oracle-fusion-saas-business-intelligence-cloud-connector-bicc-to-use-oracle-cloud-infrastructure-oci-object-storage
+    Extract to UCM (now called Oracle Webcenter Content Server), Cloud Storage Service (Classic), or Object Storage
+    Steps
+        Add offering (what is an offering)?
+        Add a datastore for an offering (what is a datastore)?  datastore = VO?  Can you browse VOs?
+        Configure where to load data (UCM or Cloud Storage Service)
+            how do you decide which?  I think Cloud Storage is Classic.
+        Creates zip file with
+            Metadata comma-separated value (.mdcsv) files: metadata files with details about columns and data type definitions for Flex VOs.
+            Comma-separated value (.csv) files: VO data and are uploaded as compressed files.
+            Primary Key comma-separated value (.pecsv) files: data files with primary key column values used to identify deleted records in the warehouse.
+    Next Steps:
+        Download files through the UI (File Import\Export UI or Traditional UCM UI).  See https://blogs.oracle.com/fusionhcmcoe/oracle-hcm-cloud-introduction-to-ucm-webcenter-content-server.
+        You may also use web services to automate the file transfer to\from UCM. It supports both RIDC and Generic Soap Port. We recommend using Generic SOAP Port service for UCM automation.
+            Option1: Command line- You can use the WebCenter Content Document Transfer Utility via command line\shell\batch scripts to automate the file transfer.
+            Option2: Java Programs- You can use the Webcenter Content Document Transfer utility and invoke it via java or use the API wrapper.
+        Datasync to pull data from UCM.
+        ODI to pull data from UCM or Object Storage.
+        Use some other tool to pull data from storage (or scripts).
 
-```
-sudo su - oracle
+DataSync:
 
-vncpasswd <enter password>
-vncserver -nolisten local -geometry 1680x1050
-```
-### **Install ODI**
+    https://www.ateam-oracle.com/using-bics-data-sync-to-extract-data-from-oracle-otbi-either-cloud-or-on-premise
+    Configured with OTBI or BICC
+    Can also extract from any JDBC Source/database, including EBS and other Oracle and non-Oracle databases (general and basic ETL tool).
 
-- Enter the following in a terminal window.
+ODI:
 
-```
-cd /u01/zips/upperstack
-unzip ODI.zip
-java -jar fmw_12.2.1.2.6_odi_generic.jar
-```
+    https://www.ateam-oracle.com/integrating-oracle-data-integrator-odi-on-premise-with-cloud-services
+    https://docs.oracle.com/en/middleware/fusion-middleware/data-integrator/12.2.1.3/odikm/oracle-object-storage.html#GUID-DFE3EBF0-0A0D-4BA0-94FE-202185E47804
+    ODI supports both RESTful and SOAP web services; thus, ODI users can extract data from any SaaS applications that provide RESTful or SOAP web services.
+    Alternatively, ODI users may use a JDBC driver to establish a connection, between ODI and the SaaS application, and extract data from the SaaS application.  The JDBC driver is a wrapper that uses the underlying web service APIs to facilitate the connection and consumption of data between the client (ODI) and the web service (SaaS application).
 
-![](images/003.png)
-![](images/004.png)
-![](images/005.png)
-![](images/006.png)
-![](images/007.png)
-![](images/008.png)
-![](images/009.png)
-![](images/010.png)
-![](images/011.png)
-![](images/012.png)
+OAC Dataflow
 
-- Enter the following:
+    https://www.ateam-oracle.com/saas-data-replication-in-oracle-analytics-cloud-oac-and-oaac
+    The user must also initially log into the Fusion SaaS BI Cloud Connector console and set up the Cloud Storage Service that will be used.
+    Create source
+    Create Replication Connection target
+    Create a Data Replication
+        Select full or incremental replication
+        Option to include deletions
+        Run now or schedule
 
-```
-sudo su - oracle
-more /u01/data/domains/JCSODICS_domain/config/jdbc/mds-owsm-jdbc.xml
-```
+Compare:
 
-- note the SP number in the text file - you will need this later (eg: SP1547852814)
+Option Title: Datasync
 
-### **Run RCU**
+Option Description: This uses Datasync to
 
-- Enter the following:
+Components
 
-```
-cd /u01/app/oracle/middleware/oracle_common/bin
-./rcu
-```
-![](images/013.png)
-![](images/014.png)
-![](images/015.png)
-![](images/016.png)
-![](images/017.png)
-![](images/018.png)
-![](images/019.png)
-![](images/020.png)
-![](images/021.png)
-![](images/022.png)
-![](images/023.png)
+Configuration Steps
 
-### **Log into WLS and stop the admin and managed servers**
+Extraction Steps
 
-- Log into the console and do the following:
+Load Options (full/incremental, etc.)
 
-![](images/024.png)
-![](images/025.png)
-![](images/026.png)
+ETL (transformation) support
 
-### **Create and Configure ODI Domain**
+Scripting Support
 
-- Enter the following.
+Scheduling Support
 
-```
-cd /u01/app/oracle/middleware/oracle_common/common/bin
-./config.sh
-```
+Limitations
 
-![](images/027.png)
+Pros
 
-- Select the following items - need to scroll down for one of them (selecting one will cause others to be selected with green checks):
+Cons
 
-```
-    Oracle Data Integrator - Agent
-    Oracle Data Integrator - Agent Libraries
-    Oracle Data Integrator SDK Shared Library Template
-    Oracle Data Integrator - Console
-    Oracle Data Integrator – Standalone Collocated Agent
-    Oracle Enterprise Manager Plugin for ODI
-```
+Performance Considerations
 
-![](images/028.png)
-![](images/029.png)
-![](images/030.png)
-![](images/031.png)
-![](images/032.png)
-![](images/033.png)
-![](images/034.png)
-![](images/035.png)
-![](images/036.png)
-![](images/037.png)
-![](images/038.png)
-![](images/039.png)
-![](images/040.png)
-![](images/041.png)
-![](images/042.png)
-![](images/043.png)
-![](images/044.png)
-![](images/045.png)
-![](images/046.png)
-![](images/047.png)
-![](images/048.png)
-
-- Be careful in the next few steps - pay attention to where you are on the Cluster tree on the right.
-
-![](images/049.png)
-![](images/050.png)
-![](images/051.png)
-![](images/052.png)
-![](images/053.png)
-![](images/054.png)
-
-### **Start Studio and create agent**
-
-- Enter the following:
-
-```
-cd /u01/app/oracle/middleware/odi/studio
-./odi.sh
-```
-
-![](images/055.png)
-![](images/056.png)
-![](images/057.png)
-![](images/058.png)
-![](images/059.png)
-![](images/060.png)
-![](images/061.png)
-![](images/062.png)
-![](images/063.png)
-![](images/064.png)
-
-### **Start WLS**
-
-- Enter the following:
-
-```
-cd /u01/app/oracle/middleware/oracle_common/common/bin
-./wlst.sh
-```
-
-- Connect (mnConnect):
-
-```
-wls:/offline> nmConnect('weblogic','Wel_Come#123','129.156.112.61','5556','JCSODICS_domain','/u01/data/domains/JCSODICS_domain')
-
-Connecting to Node Manager ...
-<Jan 18, 2019 6:03:51 PM UTC> <Info> <Security> <BEA-090905> <Disabling the CryptoJ JCE Provider self-integrity check for better startup performance. To enable this check, specify -Dweblogic.security.allowCryptoJDefaultJCEVerification=true.> 
-<Jan 18, 2019 6:03:51 PM UTC> <Info> <Security> <BEA-090906> <Changing the default Random Number Generator in RSA CryptoJ from ECDRBG128 to HMACDRBG. To disable this change, specify -Dweblogic.security.allowCryptoJDefaultPRNG=true.> 
-<Jan 18, 2019 6:03:51 PM UTC> <Info> <Security> <BEA-090909> <Using the configured custom SSL Hostname Verifier implementation: weblogic.security.utils.SSLWLSHostnameVerifier$NullHostnameVerifier.> 
-Successfully Connected to Node Manager.
-```
-
-- Start (nmStart):
-
-```
-wls:/nm/JCSODICS_domain> nmStart('JCSODICS_adminserver')
-
-Starting server JCSODICS_adminserver ...
-Successfully started server JCSODICS_adminserver ...
-wls:/nm/JCSODICS_domain> 
-```
-
-- Log into WL Server
-
-![](images/065.png)
-![](images/066.png)
-![](images/067.png)
-![](images/068.png)
-![](images/069.png)
-![](images/070.png)
-![](images/071.png)
-![](images/072.png)
-![](images/073.png)
-![](images/074.png)
-![](images/075.png)
-
-### **Test Agent**
-
-- Return to ODI Studio, select the Topology tab, and then expand agents.  Select the agent and then select the test tab.  Note that an agent is not required to run mappings (eg. for POC), but is recommended for performance reasons.
-
-![](images/076.png)
-
-![](images/077.png)
+References 
