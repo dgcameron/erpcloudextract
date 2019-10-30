@@ -7,7 +7,7 @@ The extraction of data from ERP cloud involves a few steps, and for each step th
 
 ### **High level approach**
 
-- Use ICS (bulk extract possible but not recommended)
+- Use ICS (bulk extract possible with limitations, but not recommended)
 - Use OTBI with
     - OTBI Reports: Limited data volume, not recommended
     - or BI Cloud Connector (BICC) with:
