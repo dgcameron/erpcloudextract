@@ -1,0 +1,164 @@
+------------------------------------------------
+-- Create DB
+------------------------------------------------
+
+db 12.1, with backup, enterprise ed.
+open 1521 in networking 
+
+------------------------------------------------
+-- If DB on OCI or ADW/ATP - create policy
+------------------------------------------------
+
+policy name jcs: 
+
+OCI: 
+
+Allow service PSM to inspect database-family in compartment compartment_name
+Allow service PSM to inspect database-family in compartment compartment_name
+Allow service PSM to inspect vcns in compartment <compartment_name>
+Allow service PSM to use subnets in compartment <compartment_name>
+Allow service PSM to use vnics in compartment <compartment_name>
+Allow service PSM to manage security-lists in compartment <compartment_name>
+Allow service PSM to manage all-resources in compartment <compartment_name>
+Click on button “Create” at the bottom of the screen
+
+ADW: 
+
+Allow service PSM to inspect autonomous-database in compartment compartment_name
+
+------------------------------------------------
+-- Create JCS
+------------------------------------------------
+
+If using DB on OCI, first apply this patch to JCS:
+
+https://support.oracle.com/epmos/faces/DocContentDisplay?_afrLoop=500232808913353&id=2434657.1&_afrWindowMode=0&_adf.ctrl-state=1p33fhsy9_9
+
+.. see screen shot 001 (note this was for DB on CLassic - it is a bit different with DB on OCI)
+
+*** Be sure to select the availability domain if the DB is on OCI ***
+
+Jan 17, 2019 10:32:59 PM UTC	Activity Submitted
+Jan 17, 2019 10:33:03 PM UTC	Activity Started
+Jan 17, 2019 10:33:05 PM UTC	Started operation to create service [JCSODICS] in identity domain [idcs-a8db2211d48045aa9bbc9f93fe2475bf].
+Jan 17, 2019 10:33:06 PM UTC	Creating resources [jcsodics-wls-1] for service [JCSODICS].
+Jan 17, 2019 10:39:14 PM UTC	Completed creating service [JCSODICS] resources in domain [idcs-a8db2211d48045aa9bbc9f93fe2475bf].
+Jan 17, 2019 10:41:27 PM UTC	Started operation to check provisioning status on the VMs for [WLS]
+Jan 17, 2019 10:49:57 PM UTC	Provisioning Succeeded on host(s): jcsodics-wls-1
+Jan 17, 2019 10:49:57 PM UTC	Provisioning of component [WLS] succeeded.
+Jan 17, 2019 10:50:40 PM UTC	Activity Ended
+
+------------------------------------------------
+-- Setup JCS Desktop
+------------------------------------------------
+
+https://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/javaservice/JCS/FMW_UpperStack_on_JCS/odi_on_jcs_obe/provisioning_oracle_data_integrator_cloud_service.html#section1
+
+sudo killall gnome-screensaver
+
+-- add access rule - open 5901 (WLS_ADMIN)
+screenshot 002
+
+# Firewall
+sudo sed -i 's/IPTABLES_SAVE_ON_RESTART="no"/IPTABLES_SAVE_ON_RESTART="yes"/g' /etc/sysconfig/iptables-config
+sudo iptables -I INPUT -p tcp -m tcp --dport 5901 -j ACCEPT
+sudo service iptables restart
+
+sudo su - oracle
+
+vncpasswd Wel_Come#123
+vncserver -nolisten local -geometry 1680x1050
+
+------------------------------------------------
+-- Install ODI
+------------------------------------------------
+
+cd /u01/zips/upperstack
+
+unzip ODI.zip
+
+java -jar fmw_12.2.1.2.6_odi_generic.jar
+.. see screen shots 003 - 012
+
+sudo su - oracle
+
+more /u01/data/domains/JCSODICS_domain/config/jdbc/mds-owsm-jdbc.xml
+
+-- SP1547852814
+
+------------------------------------------------
+-- Run RCU
+------------------------------------------------
+
+cd /u01/app/oracle/middleware/oracle_common/bin
+
+./rcu
+
+.. see screen shots 013 - 023
+
+------------------------------------------------
+-- Log into WLS Console and stop servers
+------------------------------------------------
+
+Log into console
+
+.. see screen shots 024 - 026
+
+------------------------------------------------
+-- Create and Configure ODI Domain
+------------------------------------------------
+
+cd /u01/app/oracle/middleware/oracle_common/common/bin
+./config.sh
+
+Select the following items (selecting one will cause others to be selected with green checks):
+
+    Oracle Data Integrator - Agent
+    Oracle Data Integrator - Agent Libraries
+    Oracle Data Integrator SDK Shared Library Template
+    Oracle Data Integrator - Console
+    Oracle Data Integrator – Standalone Collocated Agent
+    Oracle Enterprise Manager Plugin for ODI
+
+.. see screen shots 027 - 054
+
+------------------------------------------------
+-- Start Studio and Create Agent
+------------------------------------------------
+
+DO NOT USE LOCALHOST - USE IP
+
+cd /u01/app/oracle/middleware/odi/studio
+./odi.sh
+
+.. see screen shots 055 - 064
+
+------------------------------------------------
+-- Start WL Servers
+------------------------------------------------
+
+-- start weblogic
+
+cd /u01/app/oracle/middleware/oracle_common/common/bin
+./wlst.sh
+
+wls:/offline> nmConnect('weblogic','Wel_Come#123','129.156.112.61','5556','JCSODICS_domain','/u01/data/domains/JCSODICS_domain')
+
+wls:/offline> nmConnect('weblogic','Wel_Come#123','129.156.112.36','5556','JCSODICS_domain','/u01/data/domains/JCSODICS_domain')
+Connecting to Node Manager ...
+<Jan 18, 2019 6:03:51 PM UTC> <Info> <Security> <BEA-090905> <Disabling the CryptoJ JCE Provider self-integrity check for better startup performance. To enable this check, specify -Dweblogic.security.allowCryptoJDefaultJCEVerification=true.> 
+<Jan 18, 2019 6:03:51 PM UTC> <Info> <Security> <BEA-090906> <Changing the default Random Number Generator in RSA CryptoJ from ECDRBG128 to HMACDRBG. To disable this change, specify -Dweblogic.security.allowCryptoJDefaultPRNG=true.> 
+<Jan 18, 2019 6:03:51 PM UTC> <Info> <Security> <BEA-090909> <Using the configured custom SSL Hostname Verifier implementation: weblogic.security.utils.SSLWLSHostnameVerifier$NullHostnameVerifier.> 
+Successfully Connected to Node Manager.
+wls:/nm/JCSODICS_domain> 
+
+wls:/nm/JCSODICS_domain> nmStart('JCSODICS_adminserver')
+
+Starting server JCSODICS_adminserver ...
+Successfully started server JCSODICS_adminserver ...
+wls:/nm/JCSODICS_domain> 
+
+Log into WL Server
+-- screen shots 65+
+
+
