@@ -3,19 +3,17 @@
 Derrick Cameron
 Oct 30, 2019
 
-![](images/001.png)
-
 The extraction of data from ERP cloud involves a few steps, and for each step there are some choices.  However the initial extract can only be done either using Integration Cloud Service (ICS) or Oracle Transactional Business Intelligence (OTBI) View Objects.  All options are noted below for completeness, and to address possible questions on these options.
 
 ### **High level approach**
 
-- Use ICS (not recommended)
+- Use ICS (bulk extract possible but not recommended)
 - Use OTBI with
-    - OTBI Reports (not recommended)
+    - OTBI Reports: Limited data volume, not recommended
     - or BI Cloud Connector (BICC) with:
-        - OAC Data Flows (not recommended)
-        - or BICC with Datasync (not recommended)
-        - or BICC and Oracle Data Integrator (ODI) or some other ETL or scripted tool. (recommended)
+        - OAC Data Flows: Simplest process to load and access data in OAC, limited data volume and not recommended for larger extracts
+        - or BICC with Datasync: Supports larger data sets, but Datasync is not supported.
+        - or BICC with Oracle Data Integrator (ODI) or some other ETL or scripted tool: This is the recommended approach for larger scale ETL
 
 ### **ICS (not recommended)**
 
@@ -25,7 +23,9 @@ ICS is generally a transaction integration platform, and while ICS supports bulk
 
 OTBI is a BI platform on top of ERP Cloud.  It consists of a metadata layer (binary formatted rpd file) where View Objects representing subject area content are used to access the underlying data, and a web query front end for direct access to transactional data.  View Objects are not documented so the end user must search using key words.  Regardless whether you use the OTBI web dashboards/reporting tool or other options (noted below), these all use View Objects in OTBI.
 
-#### OTBI Reports:
+#### **OTBI Reports:***
+
+**OTBE Reports:**
 
 - Extract data using an analysis created in Answers - 65k row limit.
 - Extract based on the SQL from the 'Advanced' tab of an Analyses Report.  There is no 65k row limit and no dependency on an answers report, but does require you to create sql queries.
