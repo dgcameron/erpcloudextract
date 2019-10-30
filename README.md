@@ -35,21 +35,23 @@ OTBI is a BI platform on top of ERP Cloud.  It consists of a metadata layer (bin
 https://www.ateam-oracle.com/using-data-sync-to-load-data-from-fusionsaas-using-bicc-and-ucm
 https://www.ateam-oracle.com/set-up-oracle-fusion-saas-business-intelligence-cloud-connector-bicc-to-use-oracle-cloud-infrastructure-oci-object-storage
 
-- Extract to UCM (now called Oracle Webcenter Content Server), Cloud Storage Service (Classic), or Object Storage
+- Extract to UCM (now called Oracle Webcenter Content Server), Cloud Storage Service (Classic), or OCI Object Storage
 - Steps
-    - Add offering (what is an offering)?
-    - Add a datastore for an offering (what is a datastore)?  datastore = VO?  Can you browse VOs?
-    - Configure where to load data (UCM, Cloud Storage Service, or Object Storage).  Creates zip file with 
+    - Add offering.
+    - Add a datastore for an offering (View Object).
+    - Configure where to load data (UCM, Cloud Storage Service, or Object Storage).  BICC extract job creates a zip file with: 
         - Metadata comma-separated value (.mdcsv) files: metadata files with details about columns and data type definitions for Flex VOs.
         - Comma-separated value (.csv) files: VO data and are uploaded as compressed files.
         - Primary Key comma-separated value (.pecsv) files: data files with primary key column values used to identify deleted records in the warehouse.
 - Next Steps:
-    - Download files through the UI (File Import\Export UI or Traditional UCM UI).  See https://blogs.oracle.com/fusionhcmcoe/oracle-hcm-cloud-introduction-to-ucm-webcenter-content-server.
-    - You may also use web services to automate the file transfer to\from UCM. It supports both RIDC and Generic Soap Port. We recommend using Generic SOAP Port service for UCM automation.
-        - Option1: Command line- You can use the WebCenter Content Document Transfer Utility via command line\shell\batch scripts to automate the file transfer.
-        - Option2: Java Programs- You can use the Webcenter Content Document Transfer utility and invoke it via java or use the API wrapper.
-    - Datasync to pull data from UCM.
-    - ODI to pull data from UCM or Object Storage.
+    - UCM:  
+        - Download files through the UI (File Import\Export UI or Traditional UCM UI).  See https://blogs.oracle.com/fusionhcmcoe/oracle-hcm-cloud-introduction-to-ucm-webcenter-content-server.
+        - You may also use web services to automate the file transfer to\from UCM. It supports both RIDC and Generic Soap Port. We recommend using Generic SOAP Port service for UCM automation.
+            - Option1: Command line- You can use the WebCenter Content Document Transfer Utility via command line\shell\batch scripts to automate the file transfer.
+            - Option2: Java Programs- You can use the Webcenter Content Document Transfer utility and invoke it via java or use the API wrapper.
+    - OCI Object Storage:  Download available through the cloud console, or use the OCI API.
+    - Datasync: Option to pull data from UCM and load to any Oracle or non-Oracle database.  See below for more details.
+    - ODI: ETL platform that can pull data from UCM or Object Storage and load into an Oracle or non-Oracle database.  See below for more details.
     - Use some other tool to pull data from storage (or scripts).
 
 #### **DataSync:**
@@ -58,12 +60,15 @@ https://www.ateam-oracle.com/using-bics-data-sync-to-extract-data-from-oracle-ot
 
 - Configured with OTBI or BICC
 - Can also extract from any JDBC Source/database, including EBS and other Oracle and non-Oracle databases (general and basic ETL tool).
+- This option is not supported but can be used.  It can be used to load full or incremental data sets, perform basic transformations, and does not have data volume limitations.
 
 #### **ODI:**
 
- https://www.ateam-oracle.com/integrating-oracle-data-integrator-odi-on-premise-with-cloud-services
- https://docs.oracle.com/en/middleware/fusion-middleware/data-integrator/12.2.1.3/odikm/oracle-object-storage.html#GUID-DFE3EBF0-0A0D-4BA0-94FE-202185E47804
- 
+https://www.ateam-oracle.com/integrating-oracle-data-integrator-odi-on-premise-with-cloud-services
+https://docs.oracle.com/en/middleware/fusion-middleware/data-integrator/12.2.1.3/odikm/oracle-object-storage.html#GUID-DFE3EBF0-0A0D-4BA0-94FE-202185E47804
+
+Oracle Data Integrator is a comprehensive data integration platform that covers all data integration requirements: from high-volume, high-performance batch loads, to event-driven, trickle-feed integration processes, to SOA-enabled data services.
+
 - ODI supports both RESTful and SOAP web services; thus, ODI users can extract data from any SaaS applications that provide RESTful or SOAP web services.
 - Alternatively, ODI users may use a JDBC driver to establish a connection, between ODI and the SaaS application, and extract data from the SaaS application.  The JDBC driver is a wrapper that uses the underlying web service APIs to facilitate the connection and consumption of data between the client (ODI) and the web service (SaaS application).
 
@@ -79,33 +84,7 @@ https://www.ateam-oracle.com/saas-data-replication-in-oracle-analytics-cloud-oac
         - Select full or incremental replication
         - Option to include deletions
         - Run now or schedule
-
-### **Summary of Options:**
-
-Option Title: Datasync
-
-Option Description: This uses Datasync to
-
-Components
-
-Configuration Steps
-
-Extraction Steps
-
-Load Options (full/incremental, etc.)
-
-ETL (transformation) support
-
-Scripting Support
-
-Scheduling Support
-
-Limitations
-
-Pros
-
-Cons
-
-Performance Considerations
-
-References 
+        - Row limit is 125,000
+- Questions:
+    - Does OAC require BICC extracts, or does it access OTBI VO's directly?
+    - What is the overall data limit in OAC?
