@@ -75,6 +75,8 @@ Oracle Data Integrator is a comprehensive data integration platform that covers 
 #### **OAC Dataflow:**
 
 https://www.ateam-oracle.com/saas-data-replication-in-oracle-analytics-cloud-oac-and-oaac
+https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/cloud/r13/wn/common/releases/19C/19C-common-wn.htm#F9089
+https://docs.oracle.com/en/cloud/paas/analytics-cloud/acsom/create-services-oracle-analytics-cloud.html#GUID-6FC19D21-E572-4A36-937C-A1136AD989EE
 
 - The user must also initially log into the Fusion SaaS BI Cloud Connector console and set up the Cloud Storage Service that will be used.
 - Steps:
@@ -83,8 +85,6 @@ https://www.ateam-oracle.com/saas-data-replication-in-oracle-analytics-cloud-oac
     - Create a Data Replication
         - Select full or incremental replication
         - Option to include deletions
-        - Run now or schedule
-        - Row limit is 125,000
-- Questions:
-    - Does OAC require BICC extracts, or does it access OTBI VO's directly?
-    - What is the overall data limit in OAC?
+        - Run now or schedule with full or incremental replication
+        - Row limits apply (125k for 1 OCPU up to 2.2M for 16+ OCPU)
+- New in OAC, replication can source data from either BICC or OTBI VOs directly, and can target either OAC internal storage or a DBCS target.
