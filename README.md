@@ -86,5 +86,5 @@ https://docs.oracle.com/en/cloud/paas/analytics-cloud/acsom/create-services-orac
         - Select full or incremental replication
         - Option to include deletions
         - Run now or schedule with full or incremental replication
-        - Row limits apply (125k for 1 OCPU up to 2.2M for 16+ OCPU)
+        - Various row and data limits apply for data sources and reports, and for DV, Business Intelligence, and Essbase Services.  For data sources row limits are 125k for 1 OCPU up to 2.2M for 16+ OCPU.  See the OCC link above for details (plan your service section).
 - New in OAC, replication can source data from either BICC or OTBI VOs directly, and can target either OAC internal storage or a DBCS target.
