@@ -9,21 +9,27 @@ This provides an overview of the options available to extract data from ERP Clou
 
 ### **High level approach**
 
-- Use ICS (bulk extract possible with limitations, but not recommended)
-- Use OTBI with
+- ICS (bulk extract possible with limitations, but not recommended)
+- Application Development Framework (ADF) View Objects (VO):
+    - Available as part of ERP Cloud
+    - Custom VOs created by developers to extend applications and expose custom fields
+    - OTBI RPD (metadata) uses OOTB VOs 
     - OTBI Reports: Limited data volume, not recommended
     - or BI Cloud Connector (BICC) with:
         - OAC Data Flows: Simplest process to load and access data in OAC, limited data volume and not recommended for larger extracts
         - or BICC with Datasync: Supports larger data sets, but Datasync is not supported.
         - or BICC with Oracle Data Integrator (ODI) or some other ETL or scripted tool: This is the recommended approach for larger scale ETL
+- ERP Cloud REST APIs
 
 ### **ICS (not recommended)**
 
 ICS connects your applications, on-premise with Cloud (Integration Cloud Service) and helps in design, monitor, and manage connections between your applications. Automate & manage business Process (Process Cloud Service) Build Applications Visually (Visual Builder Cloud Service).  ICS is generally a transaction integration platform, and while ICS supports bulk transaction extracts, this is not recommended for large data sets.  ICS can chunk data, but the technology is better suited to real time transaction integration.  Therefore this option will not be detailed in this document.
 
-### **OTBI Options**
+### **ADF View Objects**
 
-OTBI is a BI platform on top of ERP Cloud.  It consists of a metadata layer (binary formatted rpd file) where View Objects representing subject area content are used to access the underlying data, and a web query front end for direct access to transactional data.  View Objects are not documented so the end user must search using key words.  Regardless whether you use the OTBI web dashboards/reporting tool or other options (noted below), these all use View Objects in OTBI.
+https://docs.oracle.com/cd/E25054_01/fusionapps.1111/e15524/adv_bi_vos.htm
+
+View Objects are the base logical business layer on top of the physical database tables.  Since there is no direct access to ERP Cloud database tables access is through these views.  If customizations are made to the applications developers need to expose custom fields through the View Objects.  OTBI is a BI platform on top of the View Objects in ERP Cloud.  It consists of a metadata layer (binary formatted rpd file) where View Objects representing subject area content are used to access the underlying data, and a web query front end for direct access to transactional data.  View Objects are not documented so the end user must search using key words.  Regardless whether you use the OTBI web dashboards/reporting tool or other options (noted below), these all use View Objects in OTBI.
 
 #### **OTBI Reports:**
 
@@ -90,3 +96,10 @@ https://docs.oracle.com/en/cloud/paas/analytics-cloud/acsom/create-services-orac
         - Run now or schedule with full or incremental replication
         - Various row and data limits apply for data sources and reports, and for DV, Business Intelligence, and Essbase Services.  For data sources row limits are 125k for 1 OCPU up to 2.2M for 16+ OCPU.  See the OCC link above for details (plan your service section).
 - New in OAC, replication can source data from either BICC or OTBI VOs directly, and can target either OAC internal storage or a DBCS target.
+
+### **ERP Cloud REST APIs**
+
+https://docs.oracle.com/en/cloud/saas/financials/19d/farfa/rest-endpoints.html
+
+REST APIs can retrieve content from the applications using 'GET' requests.  The response is a JSON payload.  There are many ways to invoke these requests, and this discussion will not cover these.  Generally this would require saving the data extract, possibly transforming it (eg: from JSON to CSV), uploading to Object Storage (for ADW) or the database VM (for DBCS), and then importing the data using sqlloader (DBCS), dbms_cloud.copy_data package (ADW), or an external table.  One approach to bypassing the saving of data to intermediate storage prior to import would be to invoke the REST call directly from a database package.  A sample of this follows.
+
