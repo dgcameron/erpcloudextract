@@ -3,7 +3,7 @@
 Derrick Cameron
 Oct 30, 2019
 
-The extraction of data from ERP cloud involves a few steps, and for each step there are some choices.  However the initial extract can only be done either using Integration Cloud Service (ICS) or Oracle Transactional Business Intelligence (OTBI) View Objects.  All options are noted below for completeness, and to address possible questions on these options.  There is Oracle documentation and several blogs on various approaches.  This is meant to cover all the various options and provide clarity on the tradeoffs between them rather that provide detail on any one approach.
+This provides an overview of the options available to extract data from ERP Cloud for loading into a database or analytic platform such as OAC.  The extraction of data from ERP cloud involves a few steps, and for each step there are some choices.  However the initial extract can only be done either using Integration Cloud Service (ICS) or Oracle Transactional Business Intelligence (OTBI) View Objects.  All options are noted below for completeness, and to address possible questions on these options.  There is Oracle documentation and several blogs on various approaches.  This is meant to cover all the various options and provide clarity on the tradeoffs between them rather that provide detail on any one approach.
 
 ### **High level approach**
 
