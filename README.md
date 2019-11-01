@@ -101,7 +101,7 @@ https://docs.oracle.com/en/cloud/paas/analytics-cloud/acsom/create-services-orac
 
 [REST API for Oracle Financials Cloud](https://docs.oracle.com/en/cloud/saas/financials/19d/farfa/rest-endpoints.html)
 
-Note: Custom fields created by developers are not supported.
+***Note:*** Custom fields created by developers are not supported.
 
 REST APIs can retrieve content from the applications using 'GET' requests.  The response is a JSON payload.  There are many ways to invoke these requests, and this discussion will not cover these.  Generally this would require saving the data extract (JSON response), uploading to Object Storage (for ADW) or the database VM (for DBCS), and then importing the data.  Depending on whether your target is DBCS or ADW/ATP the steps are slightly different:
 
@@ -120,7 +120,7 @@ REST APIs can retrieve content from the applications using 'GET' requests.  The 
 Sample Extract Call:
 
 ```
-curl -u	\<userid\>:\<password\> \\
+curl -u	&ltuserid&gt:&ltpassword&gt \\
 -H "Content-Type:application/json" \
 -H "Accept:application/json" \
 -X GET https://<host>/fscmRestApi/resources/11.13.18.05/expenseReports>expensereports
