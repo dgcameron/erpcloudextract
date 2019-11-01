@@ -83,7 +83,7 @@ Oracle Data Integrator is a comprehensive data integration platform that covers 
 #### **OAC Dataflow:**
 
 [SaaS Data Replication in Oracle Analytics Cloud](https://www.ateam-oracle.com/saas-data-replication-in-oracle-analytics-cloud-oac-and-oaac)
-[ERP Cloud New Features[(https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/cloud/r13/wn/common/releases/19C/19C-common-wn.htm#F9089)
+[ERP Cloud New Features](https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/cloud/r13/wn/common/releases/19C/19C-common-wn.htm#F9089)
 [Administering Oracle Analytics Cloud](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acsom/create-services-oracle-analytics-cloud.html#GUID-6FC19D21-E572-4A36-937C-A1136AD989EE)
 
 - The user must also initially log into the Fusion SaaS BI Cloud Connector console and set up the Cloud Storage Service that will be used.
