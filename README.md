@@ -120,7 +120,7 @@ REST APIs can retrieve content from the applications using 'GET' requests.  The 
 Sample Extract Call:
 
 ```
-curl -u	&ltuserid&gt:&ltpassword&gt \\
+curl -u	&lt;userid&gt;:&lt;password&gt; \\
 -H "Content-Type:application/json" \
 -H "Accept:application/json" \
 -X GET https://<host>/fscmRestApi/resources/11.13.18.05/expenseReports>expensereports
