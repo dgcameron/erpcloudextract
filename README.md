@@ -120,6 +120,7 @@ REST APIs can retrieve content from the applications using 'GET' requests.  The 
 Sample Extract Call:
 
 ```
+
 curl -u	&lt;userid&gt;:&lt;password&gt; \\
 -H "Content-Type:application/json" \
 -H "Accept:application/json" \
