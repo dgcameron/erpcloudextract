@@ -9,17 +9,19 @@ This provides an overview of the options available to extract data from ERP Clou
 
 ### **High level approach**
 
-- ICS (bulk extract possible with limitations, but not recommended)
+- ICS (bulk extract possible with limitations, but not recommended).
 - Application Development Framework (ADF) View Objects (VO):
-    - Available as part of ERP Cloud
-    - Custom VOs created by developers to extend applications and expose custom fields
-    - OTBI RPD (metadata) uses OOTB VOs 
-    - OTBI Reports: Limited data volume, not recommended
-    - or BI Cloud Connector (BICC) with:
-        - OAC Data Flows: Simplest process to load and access data in OAC, limited data volume and not recommended for larger extracts
-        - or BICC with Datasync: Supports larger data sets, but Datasync is not supported.
-        - or BICC with Oracle Data Integrator (ODI) or some other ETL or scripted tool: This is the recommended approach for larger scale ETL
-- ERP Cloud REST APIs
+    - Available as part of ERP Cloud.
+    - Custom VOs must be created by developers to extend applications and expose custom fields.
+    - OTBI RPD (metadata) uses OOTB VOs.
+    - Steps:
+        - Export data using OTBI Reports: Limited data volume, not recommended.
+        - or Run BI Cloud Connector extract jobs (BICC) with:
+            - OAC Data Flows: Simplest process to load and access data in OAC, limited data volume and not recommended for larger extracts.
+            - or Datasync: Supports larger data sets, but Datasync is not supported.
+            - or Oracle Data Integrator (ODI): Recommended for large scale ETL/ELT.
+            - or some other ETL too or scripts: Alternative recommendation for large scale ETL/ELT.
+- ERP Cloud REST APIs: Limited data volume, not recommended.
 
 ### **ICS (not recommended)**
 
@@ -29,9 +31,11 @@ ICS connects your applications, on-premise with Cloud (Integration Cloud Service
 
 [Introduction to View Objects for Oracle Business Intelligence Applications](https://docs.oracle.com/cd/E25054_01/fusionapps.1111/e15524/adv_bi_vos.htm)
 
-View Objects are the base logical business layer on top of the physical database tables.  Since there is no direct access to ERP Cloud database tables access is through these views.  If customizations are made to the applications developers need to expose custom fields through the View Objects.  OTBI is a BI platform on top of the View Objects in ERP Cloud.  It consists of a metadata layer (binary formatted rpd file) where View Objects representing subject area content are used to access the underlying data, and a web query front end for direct access to transactional data.  View Objects are not documented so the end user must search using key words.  Regardless whether you use the OTBI web dashboards/reporting tool or other options (noted below), these all use View Objects in OTBI.
+View Objects are the base logical business layer on top of the physical database tables.  Since there is no direct access to ERP Cloud database tables access is through these views.  If customizations are made to the applications developers need to expose custom fields through the View Objects.  OTBI is a BI platform on top of the View Objects in ERP Cloud.  It consists of a metadata layer (binary formatted rpd file) where View Objects representing subject area content are used to access the underlying data, and a web query front end for direct access to transactional data.  View Objects are not documented so the end user must search using key words.  Regardless whether you use the OTBI web dashboards/reporting tool or other options (noted below), these all use View Objects.
 
 #### **OTBI Reports:**
+
+[Creating Analytics and Reports](https://docs.oracle.com/cd/E51367_01/commonops_gs/OCHRA/F1415829AN11D19.htm)
 
 - Extract data using an analysis created in Answers - 65k row limit.
 - Extract based on the SQL from the 'Advanced' tab of an Analyses Report.  There is no 65k row limit and no dependency on an answers report, but does require you to create sql queries.
@@ -43,9 +47,12 @@ View Objects are the base logical business layer on top of the physical database
 [Using Data Sync to Extract and Load Data from Fusion SaaS using the BI Cloud Connector (BICC) and UCM](https://www.ateam-oracle.com/using-data-sync-to-load-data-from-fusionsaas-using-bicc-and-ucm)
 [Set up Oracle Fusion SaaS Business Intelligence Cloud Connector (BICC) to use Oracle Cloud Infrastructure (OCI) Object Storage](https://www.ateam-oracle.com/set-up-oracle-fusion-saas-business-intelligence-cloud-connector-bicc-to-use-oracle-cloud-infrastructure-oci-object-storage)
 
-- Extract to UCM (now called Oracle Webcenter Content Server), Cloud Storage Service (Classic), or OCI Object Storage.  Note Oracle Storage Service Classic is not recommended and will not be discussed further in these notes.
+- Extract to:
+    - UCM (now called Oracle Webcenter Content Server).
+    - or Cloud Storage Service (Classic - not recommended and will not be discussed further in these notes).
+    - or OCI Object Storage (recommended).
 - Steps
-    - Add offering.
+    - Add offering
     - Add a datastore for an offering (View Object).
     - Configure where to load data (UCM, Cloud Storage Service, or Object Storage).  BICC extract job creates a zip file with: 
         - Metadata comma-separated value (.mdcsv) files: metadata files with details about columns and data type definitions for Flex VOs.
@@ -58,7 +65,15 @@ View Objects are the base logical business layer on top of the physical database
         - You may also use web services to automate the file transfer to\from UCM. It supports both RIDC and Generic Soap Port. We recommend using Generic SOAP Port service for UCM automation.
             - Option1: Command line- You can use the WebCenter Content Document Transfer Utility via command line\shell\batch scripts to automate the file transfer.
             - Option2: Java Programs- You can use the Webcenter Content Document Transfer utility and invoke it via java or use the API wrapper.
-    - OCI Object Storage:  Download available through the cloud console, or use the OCI API.
+    - OCI Object Storage:  
+        - Download available through the cloud console, or use the OCI API.
+        - ADW target:
+            - Create an external table that points to the csv file(s) in object storage (directly queryable).
+            - Optionally create standard table in ADW and load/copy data from the external object store to the ADW table.
+        - DBCS target:
+            - Copy the export file from Object Storage to the DBCS O/S by either downloading from object storage and uploading to DBCS, or installing the OCI CLI on DBCS and directly copying the data file.
+            - Create an external table in DBCS.
+            - Optionally create standard table in DBCS and load/copy data from the external object store to the ADW table.
     - ODI: ETL platform that can pull data from UCM or Object Storage and load into an Oracle or non-Oracle database.  See below for more details.
     - Use some other tool to pull data from storage (or scripts).
 
@@ -66,7 +81,7 @@ View Objects are the base logical business layer on top of the physical database
 
 [Using BICS Data Sync to Extract Data from Oracle OTBI, either Cloud or On-Premise](https://www.ateam-oracle.com/using-bics-data-sync-to-extract-data-from-oracle-otbi-either-cloud-or-on-premise)
 
-- Configured with OTBI or BICC
+- Configured with OTBI or BICC.
 - Can also extract from any JDBC Source/database, including EBS and other Oracle and non-Oracle databases (general and basic ETL tool).
 - This option is not supported but can be used.  It can be used to load full or incremental data sets, perform basic transformations, and does not have data volume limitations.
 
@@ -88,12 +103,12 @@ Oracle Data Integrator is a comprehensive data integration platform that covers 
 
 - The user must also initially log into the Fusion SaaS BI Cloud Connector console and set up the Cloud Storage Service that will be used.
 - Steps:
-    - Create source
-    - Create Replication Connection target
-    - Create a Data Replication
-        - Select full or incremental replication
-        - Option to include deletions
-        - Run now or schedule with full or incremental replication
+    - Create source.
+    - Create Replication Connection target.
+    - Create a Data Replication.
+        - Select full or incremental replication.
+        - Option to include deletions.
+        - Run now or schedule with full or incremental replication.
         - Various row and data limits apply for data sources and reports, and for DV, Business Intelligence, and Essbase Services.  For data sources row limits are 125k for 1 OCPU up to 2.2M for 16+ OCPU.  See the OCC link above for details (plan your service section).
 - New in OAC, replication can source data from either BICC or OTBI VOs directly, and can target either OAC internal storage or a DBCS target.
 
