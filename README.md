@@ -105,7 +105,7 @@ Note: Custom fields created by developers are not supported.
 
 REST APIs can retrieve content from the applications using 'GET' requests.  The response is a JSON payload.  There are many ways to invoke these requests, and this discussion will not cover these.  Generally this would require saving the data extract (JSON response), uploading to Object Storage (for ADW) or the database VM (for DBCS), and then importing the data.  Depending on whether your target is DBCS or ADW/ATP the steps are slightly different:
 
-- ADW (https://blogs.oracle.com/datawarehousing/loading-your-object-store-data-into-autonomous-database)
+- [ADW](https://blogs.oracle.com/datawarehousing/loading-your-object-store-data-into-autonomous-database)
     - Upload to Object Storage
     - Create a new table to load the data into.  This is a JSON document store (BLOB). 
     - Optionally create a second standard table for validated JSON data (less processing, faster).
