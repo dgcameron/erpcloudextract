@@ -27,7 +27,7 @@ ICS connects your applications, on-premise with Cloud (Integration Cloud Service
 
 ### **ADF View Objects**
 
-https://docs.oracle.com/cd/E25054_01/fusionapps.1111/e15524/adv_bi_vos.htm
+[Introduction to View Objects for Oracle Business Intelligence Applications](https://docs.oracle.com/cd/E25054_01/fusionapps.1111/e15524/adv_bi_vos.htm)
 
 View Objects are the base logical business layer on top of the physical database tables.  Since there is no direct access to ERP Cloud database tables access is through these views.  If customizations are made to the applications developers need to expose custom fields through the View Objects.  OTBI is a BI platform on top of the View Objects in ERP Cloud.  It consists of a metadata layer (binary formatted rpd file) where View Objects representing subject area content are used to access the underlying data, and a web query front end for direct access to transactional data.  View Objects are not documented so the end user must search using key words.  Regardless whether you use the OTBI web dashboards/reporting tool or other options (noted below), these all use View Objects in OTBI.
 
@@ -40,8 +40,8 @@ View Objects are the base logical business layer on top of the physical database
 
 #### **BICC:**
 
-https://www.ateam-oracle.com/using-data-sync-to-load-data-from-fusionsaas-using-bicc-and-ucm
-https://www.ateam-oracle.com/set-up-oracle-fusion-saas-business-intelligence-cloud-connector-bicc-to-use-oracle-cloud-infrastructure-oci-object-storage
+[Using Data Sync to Extract and Load Data from Fusion SaaS using the BI Cloud Connector (BICC) and UCM](https://www.ateam-oracle.com/using-data-sync-to-load-data-from-fusionsaas-using-bicc-and-ucm)
+[Set up Oracle Fusion SaaS Business Intelligence Cloud Connector (BICC) to use Oracle Cloud Infrastructure (OCI) Object Storage](https://www.ateam-oracle.com/set-up-oracle-fusion-saas-business-intelligence-cloud-connector-bicc-to-use-oracle-cloud-infrastructure-oci-object-storage)
 
 - Extract to UCM (now called Oracle Webcenter Content Server), Cloud Storage Service (Classic), or OCI Object Storage.  Note Oracle Storage Service Classic is not recommended and will not be discussed further in these notes.
 - Steps
@@ -64,7 +64,7 @@ https://www.ateam-oracle.com/set-up-oracle-fusion-saas-business-intelligence-clo
 
 #### **DataSync:**
 
-https://www.ateam-oracle.com/using-bics-data-sync-to-extract-data-from-oracle-otbi-either-cloud-or-on-premise
+[Using BICS Data Sync to Extract Data from Oracle OTBI, either Cloud or On-Premise](https://www.ateam-oracle.com/using-bics-data-sync-to-extract-data-from-oracle-otbi-either-cloud-or-on-premise)
 
 - Configured with OTBI or BICC
 - Can also extract from any JDBC Source/database, including EBS and other Oracle and non-Oracle databases (general and basic ETL tool).
@@ -72,8 +72,8 @@ https://www.ateam-oracle.com/using-bics-data-sync-to-extract-data-from-oracle-ot
 
 #### **ODI:**
 
-https://www.ateam-oracle.com/integrating-oracle-data-integrator-odi-on-premise-with-cloud-services
-https://docs.oracle.com/en/middleware/fusion-middleware/data-integrator/12.2.1.3/odikm/oracle-object-storage.html#GUID-DFE3EBF0-0A0D-4BA0-94FE-202185E47804
+[Integrating Oracle Data Integrator (ODI) On-Premises with Cloud Services](https://www.ateam-oracle.com/integrating-oracle-data-integrator-odi-on-premise-with-cloud-services)
+[Oracle Object Storage](https://docs.oracle.com/en/middleware/fusion-middleware/data-integrator/12.2.1.3/odikm/oracle-object-storage.html#GUID-DFE3EBF0-0A0D-4BA0-94FE-202185E47804)
 
 Oracle Data Integrator is a comprehensive data integration platform that covers all data integration requirements: from high-volume, high-performance batch loads, to event-driven, trickle-feed integration processes, to SOA-enabled data services.
 
@@ -82,9 +82,9 @@ Oracle Data Integrator is a comprehensive data integration platform that covers 
 
 #### **OAC Dataflow:**
 
-https://www.ateam-oracle.com/saas-data-replication-in-oracle-analytics-cloud-oac-and-oaac
-https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/cloud/r13/wn/common/releases/19C/19C-common-wn.htm#F9089
-https://docs.oracle.com/en/cloud/paas/analytics-cloud/acsom/create-services-oracle-analytics-cloud.html#GUID-6FC19D21-E572-4A36-937C-A1136AD989EE
+[SaaS Data Replication in Oracle Analytics Cloud](https://www.ateam-oracle.com/saas-data-replication-in-oracle-analytics-cloud-oac-and-oaac)
+[ERP Cloud New Features[(https://www.oracle.com/webfolder/technetwork/tutorials/tutorial/cloud/r13/wn/common/releases/19C/19C-common-wn.htm#F9089)
+[Administering Oracle Analytics Cloud](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acsom/create-services-oracle-analytics-cloud.html#GUID-6FC19D21-E572-4A36-937C-A1136AD989EE)
 
 - The user must also initially log into the Fusion SaaS BI Cloud Connector console and set up the Cloud Storage Service that will be used.
 - Steps:
@@ -121,10 +121,10 @@ Sample Extract Call:
 
 ```
 
-curl -u	&lt;userid&gt;:&lt;password&gt; \\
+curl -u	&lt;userid&gt;:&lt;password&gt; \
 -H "Content-Type:application/json" \
 -H "Accept:application/json" \
--X GET https://<host>/fscmRestApi/resources/11.13.18.05/expenseReports>expensereports
+-X GET https://&lt;host&gt;/fscmRestApi/resources/11.13.18.05/expenseReports&gt;expensereports
 
 cat expensereports
 
