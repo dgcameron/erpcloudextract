@@ -50,7 +50,7 @@ View Objects are the base logical business layer on top of the physical database
 - Extract to:
     - UCM (now called Oracle Webcenter Content Server).
     - or Cloud Storage Service (Classic - not recommended and will not be discussed further in these notes).
-    - or OCI Object Storage (recommended).
+    - or OCI Object Storage ***(recommended)***.
 - Steps
     - Add offering
     - Add a datastore for an offering (View Object).
@@ -65,16 +65,17 @@ View Objects are the base logical business layer on top of the physical database
         - You may also use web services to automate the file transfer to\from UCM. It supports both RIDC and Generic Soap Port. We recommend using Generic SOAP Port service for UCM automation.
             - Option1: Command line- You can use the WebCenter Content Document Transfer Utility via command line\shell\batch scripts to automate the file transfer.
             - Option2: Java Programs- You can use the Webcenter Content Document Transfer utility and invoke it via java or use the API wrapper.
-    - OCI Object Storage:  
+    - OCI Object Storage ***(recommended)***:  
         - Download available through the cloud console, or use the OCI API.
-        - ADW target:
+        - ADW target: ***(recommended)***
             - Create an external table that points to the csv file(s) in object storage (directly queryable).
             - Optionally create standard table in ADW and load/copy data from the external object store to the ADW table.
         - DBCS target:
             - Copy the export file from Object Storage to the DBCS O/S by either downloading from object storage and uploading to DBCS, or installing the OCI CLI on DBCS and directly copying the data file.
             - Create an external table in DBCS.
             - Optionally create standard table in DBCS and load/copy data from the external object store to the ADW table.
-    - ODI: ETL platform that can pull data from UCM or Object Storage and load into an Oracle or non-Oracle database.  See below for more details.
+    - ODI: ***(recommended)*** 
+        - ETL platform that can pull data from UCM or Object Storage and load into an Oracle or non-Oracle database.  See below for more details.
     - Use some other tool to pull data from storage (or scripts).
 
 #### **DataSync:**
