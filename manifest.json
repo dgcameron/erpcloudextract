@@ -7,14 +7,14 @@
             {
                 "number": "10",
                 "filename": "README.md",
-                "title": "notes",
-                "description": "notes"
+                "title": "Options",
+                "description": "Options"
             },
             {
                 "number": "20",
                 "filename": "summary.md",
-                "title": "Summary of Options",
-                "description": "Summary of Options"
+                "title": "Compare",
+                "description": "Compare"
             }
         ]
     }
