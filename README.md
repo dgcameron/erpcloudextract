@@ -35,7 +35,7 @@ View Objects are the base logical business layer on top of the physical database
 
 #### **OTBI Reports:**
 
-[Creating Analytics and Reports](https://docs.oracle.com/cd/E51367_01/commonops_gs/OCHRA/F1415829AN11D19.htm)
+[Creating Analysis and Reports](https://docs.oracle.com/cd/E51367_01/commonops_gs/OCHRA/F1415829AN11D19.htm)
 
 - Extract data using an analysis created in Answers - 65k row limit.
 - Extract based on the SQL from the 'Advanced' tab of an Analyses Report.  There is no 65k row limit and no dependency on an answers report, but does require you to create sql queries.
@@ -54,7 +54,7 @@ View Objects are the base logical business layer on top of the physical database
 - Steps
     - Add offering
     - Add a datastore for an offering (View Object).
-    - Configure where to load data (UCM, Cloud Storage Service, or Object Storage).  BICC extract job creates a zip file with: 
+    - Configure target storage (UCM, Cloud Storage Service, or Object Storage).  BICC extract job creates a zip file with: 
         - Metadata comma-separated value (.mdcsv) files: metadata files with details about columns and data type definitions for Flex VOs.
         - Comma-separated value (.csv) files: VO data and are uploaded as compressed files.
         - Primary Key comma-separated value (.pecsv) files: data files with primary key column values used to identify deleted records in the warehouse.
