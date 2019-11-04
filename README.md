@@ -9,7 +9,7 @@ This provides an overview of the options available to extract data from ERP Clou
 
 ### **High level approach**
 
-- ICS (bulk extract possible with limitations, but not recommended).
+- Oracle Integration Cloud (OIC) (bulk extract possible with limitations, but not recommended).
 - Application Development Framework (ADF) View Objects (VO):
     - Available as part of ERP Cloud.
     - Custom VOs must be created by developers to extend applications and expose custom fields.
@@ -23,9 +23,9 @@ This provides an overview of the options available to extract data from ERP Clou
             - or some other ETL too or scripts: Alternative recommendation for large scale ETL/ELT.
 - ERP Cloud REST APIs: Limited data volume, not recommended.
 
-### **ICS (not recommended)**
+### **OIC (not recommended)**
 
-ICS connects your applications, on-premise with Cloud (Integration Cloud Service) and helps in design, monitor, and manage connections between your applications. Automate & manage business Process (Process Cloud Service) Build Applications Visually (Visual Builder Cloud Service).  ICS is generally a transaction integration platform, and while ICS supports bulk transaction extracts, this is not recommended for large data sets.  ICS can chunk data, but the technology is better suited to real time transaction integration.  Therefore this option will not be detailed in this document.
+OIC connects your applications, on-premise with Cloud (Integration Cloud Service) and helps in design, monitor, and manage connections between your applications. Automate & manage business Process (Process Cloud Service) Build Applications Visually (Visual Builder Cloud Service).  ICS is generally a transaction integration platform, and while ICS supports bulk transaction extracts, this is not recommended for large data sets.  OIC can chunk data, but the technology is better suited to real time transaction integration.  Therefore this option will not be detailed in this document.
 
 ### **ADF View Objects**
 
