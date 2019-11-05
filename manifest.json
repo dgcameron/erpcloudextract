@@ -6,13 +6,13 @@
         "labs": [
             {
                 "number": "10",
-                "filename": "summary.md",
+                "filename": "README.md",
                 "title": "Compare",
                 "description": "Compare"
             },
             {
                 "number": "20",
-                "filename": "README.md",
+                "filename": "detail.md",
                 "title": "Options",
                 "description": "Options"
             }
