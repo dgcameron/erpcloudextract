@@ -11,6 +11,12 @@ Summary Comparison.  Click on the upper right for more details.
 
 |Extract From ERP|Steps|Result|Limitations|Pricing-paygo|Pricing-Monthly Flex|
 |---|---|---|---|---|---|
-|Oracle Integration Cloud (OAC)|Define source and target Connections|Target table loaded|must not exceed the maximum quantity of 5,000 Messages per Hour that You set when You create an instance for the Oracle Cloud Service|5k messages/hour|5k messages/hour|
-|   |   |   |   |   |   |
-|   |   |   |   |   |   |
+|Oracle Integration Cloud (OAC)|Define source and target Connections|Target table loaded|Must not exceed the maximum quantity of 5,000 Messages per Hour that You set when You create an instance for the Oracle Cloud Service|5k messages/hour|5k messages/hour|
+|   |Define integration|   |   |Standard: $1.2097|Standard: $0.806467|
+|   |   |   |   |Enterprise: $2.4194|Enterprise: $1.612933|
+|   |   |   |   |BYOL 20k messages/hour|BYOL 20k messages/hour|
+|   |   |   |   |Standard: $0.4839|Standard: $0.3226|
+|   |   |   |   |Enterprise: $0.4839|Enterprise: $0.3226|
+|   |   |   |   |  |   |
+|   |   |   |   |  |   |
+|   |   |   |   |  |   |
