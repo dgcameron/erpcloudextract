@@ -1,16 +1,5 @@
 # **Extract ERP Data using OTBI Reports**
 
-### **Pre-requisites**
-
-- You have an ERP Cloud instance account that has the required priviledges to access bicc and create connections and replications (see link above for details)
-- You have created a target database (DBCS or ADW/ATP).
-- You have provisioned a Oracle Analytics Cloud (OAC) Service.
-- You have a local (not federated) cloud userid.
-- The cloud userid has no more than one api key.  This is because you will need to create and add two additional public API keys from the new connections you will create below.  These connections do not allow you to use existing keys, and the cloud user accounts only allow a maximum of three API keys.
-- You have created an OCI bucket in your tenancy.
-
-### **Log into the ERP Cloud and navigate to OTBI**
-
 - Log into ERP Cloud.
 
 ![](images/052.png)

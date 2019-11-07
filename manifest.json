@@ -21,13 +21,18 @@
                 "filename": "oac_data_replication.md",
                 "title": "OAC Data Replication",
                 "description": "OAC Data Replication"
-            }
-            ,
+            },
             {
                 "number": "40",
                 "filename": "otbi_data_replication.md",
                 "title": "OTBI Data Replication",
                 "description": "OTBI Data Replication"
+            },
+            {
+                "number": "50",
+                "filename": "resetapi_data_replication.md",
+                "title": "REST API Data Replication",
+                "description": "REST API Data Replication"
             }
         ]
     }
