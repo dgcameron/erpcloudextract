@@ -113,19 +113,20 @@ The job you just ran loads your metadata and data into Object Storage.  You stil
 
 [Integrating Oracle Data Integrator (ODI) On-Premises with Cloud Services](https://www.ateam-oracle.com/integrating-oracle-data-integrator-odi-on-premise-with-cloud-services)
 [Oracle Object Storage](https://docs.oracle.com/en/middleware/fusion-middleware/data-integrator/12.2.1.3/odikm/oracle-object-storage.html#GUID-DFE3EBF0-0A0D-4BA0-94FE-202185E47804)
+[How to Use Oracle Data Integrator Cloud Service (ODI-CS) to Manipulate Data from Oracle Cloud Infrastructure Object Storage](https://blogs.oracle.com/dataintegration/how-to-use-oracle-data-integrator-cloud-service-odi-cs-to-manipulate-data-from-oracle-cloud-infrastructure-object-storage)
 
 Oracle Data Integrator is a comprehensive data integration platform that covers all data integration requirements: from high-volume, high-performance batch loads, to event-driven, trickle-feed integration processes, to SOA-enabled data services.
 
-- ODI supports both RESTful and SOAP web services; thus, ODI users can extract data from any SaaS applications that provide RESTful or SOAP web services.
-- Alternatively, ODI users may use a JDBC driver to establish a connection, between ODI and the SaaS application, and extract data from the SaaS application.  The JDBC driver is a wrapper that uses the underlying web service APIs to facilitate the connection and consumption of data between the client (ODI) and the web service (SaaS application).
+- ODI Supports the orchestration of data extraction from ERP Cloud to database targets, and can also process files in Object Storage and load these into your databases.
+- This is the recommended approach to managing ERP Cloud data replication, loading, and transformation into database targets.
 
 #### **DataSync:**
 
 [Using BICS Data Sync to Extract Data from Oracle OTBI, either Cloud or On-Premise](https://www.ateam-oracle.com/using-bics-data-sync-to-extract-data-from-oracle-otbi-either-cloud-or-on-premise)
 
-- Configured with OTBI or BICC.
-- Can also extract from any JDBC Source/database, including EBS and other Oracle and non-Oracle databases (general and basic ETL tool).
-- This option is ***not supported*** but can be used.  It can be used to load full or incremental data sets, perform basic transformations, and does not have data volume limitations.
+- DataSync can be configured with OTBI or BICC.
+- DataSync can also extract from any JDBC Source/database, including EBS and other Oracle and non-Oracle databases (general and basic ETL tool).
+- Note this option is ***not supported*** but can be used.  It can be used to load full or incremental data sets, perform basic transformations, and does not have data volume limitations.
 
 #### **Scripting:**
 

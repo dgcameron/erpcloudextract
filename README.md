@@ -9,26 +9,28 @@ This provides an overview of the options available to extract data from ERP Clou
 
 ### **Options in Recommended Order (Depends Partly on Use Case):**
 
-- [**BI Cloud Connector (BICC)**](bicc_data_replication.md):
+- **[BI Cloud Connector (BICC)](bicc_data_replication.md):**
     - No data volume limits
     - BICC Loads data to object storage with scheduled jobs.  From there you have choices to load into targets:
-        - Oracle Data Integrator (ODI).  ODI can manage the BICC source and dbcs/adw targets, and orchestrate the movement of data from BICC to Object Storage and from there to your target.  This is the recommended tool.
+        - Oracle Data Integrator (ODI).  ODI can manage the BICC source and dbcs/adw targets, and orchestrate the movement of data from BICC to Object Storage and from there to your target.  ***This is the recommended tool***.
         - Datasync:  As an alternative to using ODI you can also replicate (via BICC) data from BICC to Object Storage and from there to your target.  Data Sync is not supported
         - Scripting:  Yet another alternative is to move data from Object Storage to DBCS or ADW via scripted methods (OCI API tool with External Tables).
-- [Oracle Analytics Cloud (OAC) Data Replication](oac_data_replication.md):
+- [**Oracle Analytics Cloud (OAC) Data Replication**](oac_data_replication.md):
     - Simplest overall process if the objective is to use OAC against a DBCS or ADW target.
     - Has some data volume limits.
 - Oracle Integration Cloud (OIC):
     - Bulk extract possible with limitations, but not recommended.
-- [ERP Cloud REST APIs](restapip_data_replication.md): 
+- [**ERP Cloud REST APIs**](restapip_data_replication.md): 
     - Has data volume limits.
 - [OTBI Reports](otbi_data_replication.md):
     - Has data volume limits.
     - Export data to csv files on your desktop, after which you need to load into your database target.
 
-### **OIC (not recommended)**
 
-OIC connects your applications, on-premise with Cloud (Integration Cloud Service) and helps in design, monitor, and manage connections between your applications. Automate & manage business Process (Process Cloud Service) Build Applications Visually (Visual Builder Cloud Service).  ICS is generally a transaction integration platform, and while ICS supports bulk transaction extracts, this is not recommended for large data sets.  OIC can chunk data, but the technology is better suited to real time transaction integration.  Therefore this option will not be detailed in this document.
+### **Important Considerations**
+
+- **OIC:**:  OIC connects your applications, on-premise with Cloud (Integration Cloud Service) and helps in design, monitor, and manage connections between your applications. Automate & manage business Process (Process Cloud Service) Build Applications Visually (Visual Builder Cloud Service).  ICS is generally a transaction integration platform, and while ICS supports bulk transaction extracts, this is ***not recommended*** for large data sets.  OIC can chunk data, but the technology is better suited to real time transaction integration.  Therefore this option will not be detailed in this document.
+- **Application customizations:**  Developers can customize ERP Cloud and may create new data fields.  These data fields must be exposed in custom View Objects.  These custom View Objects can be selected in BICC and OAC Data Replications, but are not available in  
 
 ### **ADF View Objects**
 
