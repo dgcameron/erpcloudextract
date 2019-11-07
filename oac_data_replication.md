@@ -1,6 +1,7 @@
 # **Replicate Data using BICC and OAC Replication**
 
 [Preparing Data in Oracle Analytics Cloud](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acabi/replicate-data.html#GUID-5FDDF00E-4774-44E7-AE56-572D003C2062)
+[Administering Oracle Analytics Cloud](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acsom/create-services-oracle-analytics-cloud.html#GUID-164D8568-9AE3-4A74-9F1A-0D87B78713C9)
 [Blog on BICC - OCI Object Storage](https://www.ateam-oracle.com/set-up-oracle-fusion-saas-business-intelligence-cloud-connector-bicc-to-use-oracle-cloud-infrastructure-oci-object-storage)
 
 ### **Pre-requisites**
@@ -198,4 +199,15 @@
 
 - Replications can be full or incremental.
 - Options can include deletions.
-- Various row and data limits apply for data sources and reports, and for DV, Business Intelligence, and Essbase Services.  For data sources row limits are 125k for 1 OCPU up to 2.2M for 16+ OCPU.  See the OCC link above for details (plan your service section).
+- Various row and data limits apply for data sources and reports, and for DV, Business Intelligence, and Essbase Services.  These limits relate to querying, exporting, and visualizing data (reporting) and not to replication limits.  However in a test load the following was observed:
+
+Data Table: FSCM_COST_DISTRIBUTIONS
+Rows: 508292
+zip file in Object Storage: 25.7MB
+csv file: 710MB
+
+BICC Extract Time: 241 seconds
+OAC Extract Time: 100 seconds
+OAC Load to DBCS: Over 3 hours (load is committed in batches of 2000 records, each taking about 54 seconds - extremely slow)
+
+While not tested, an alternative approach that SCP's the csv file to DBCS, and then loads into a table using external tables should take not more than five minutes.
