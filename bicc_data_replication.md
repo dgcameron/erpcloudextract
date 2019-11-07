@@ -53,6 +53,8 @@
 
 ![](images/012.png)
 
+### **Create and Run a Replication Job**
+
 - Select Manage Extract Schedules.
 
 ![](images/013.png)
@@ -105,13 +107,7 @@
 
 ### **Next Steps**
 
-#### **DataSync:**
-
-[Using BICS Data Sync to Extract Data from Oracle OTBI, either Cloud or On-Premise](https://www.ateam-oracle.com/using-bics-data-sync-to-extract-data-from-oracle-otbi-either-cloud-or-on-premise)
-
-- Configured with OTBI or BICC.
-- Can also extract from any JDBC Source/database, including EBS and other Oracle and non-Oracle databases (general and basic ETL tool).
-- This option is not supported but can be used.  It can be used to load full or incremental data sets, perform basic transformations, and does not have data volume limitations.
+The job you just ran loads your metadata and data into Object Storage.  You still may wish to load this into a DBCS or ADW (or other) target.  The following are some options.
 
 #### **ODI:**
 
@@ -122,3 +118,18 @@ Oracle Data Integrator is a comprehensive data integration platform that covers 
 
 - ODI supports both RESTful and SOAP web services; thus, ODI users can extract data from any SaaS applications that provide RESTful or SOAP web services.
 - Alternatively, ODI users may use a JDBC driver to establish a connection, between ODI and the SaaS application, and extract data from the SaaS application.  The JDBC driver is a wrapper that uses the underlying web service APIs to facilitate the connection and consumption of data between the client (ODI) and the web service (SaaS application).
+
+#### **DataSync:**
+
+[Using BICS Data Sync to Extract Data from Oracle OTBI, either Cloud or On-Premise](https://www.ateam-oracle.com/using-bics-data-sync-to-extract-data-from-oracle-otbi-either-cloud-or-on-premise)
+
+- Configured with OTBI or BICC.
+- Can also extract from any JDBC Source/database, including EBS and other Oracle and non-Oracle databases (general and basic ETL tool).
+- This option is ***not supported*** but can be used.  It can be used to load full or incremental data sets, perform basic transformations, and does not have data volume limitations.
+
+#### **Scripting:**
+
+Depending on whether your target is DBCS or ADW you have some options.  
+
+- **DBCS:**  You could install the [OCI CLI](https://docs.cloud.oracle.com/iaas/Content/API/Concepts/cliconcepts.htm) on your DBCS target platform and then [pull](https://docs.cloud.oracle.com/iaas/tools/oci-cli/latest/oci_cli_docs/cmdref/os/object/get.html) your files from object storage.  You can then use sqlloader or [external tables](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/sutil/examples-using-oracle-external-tables.html#GUID-53C71354-FDC0-4CD7-BBF1-2B7327A1A245) to copy the data from your csv file to a table.
+- **ADW:**  ADW supports the creation of [external tables](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/user/query-external-data.html#GUID-72DC8BB6-5245-4262-A100-C35A2E553F70) directly on object storage csv files.  You may need to unzip the files to expose the csv file.  This saves copying the file from Object Storage to ADW. 
