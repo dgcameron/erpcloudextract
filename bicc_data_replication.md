@@ -2,7 +2,7 @@
 
 [Blog on BICC - OCI Object Storage](https://www.ateam-oracle.com/set-up-oracle-fusion-saas-business-intelligence-cloud-connector-bicc-to-use-oracle-cloud-infrastructure-oci-object-storage)
 
-### **Pre-requisites**
+### **Prerequisites**
 
 - You have an ERP Cloud instance account that has the required priviledges to access bicc and create connections and replications (see link above for details).  Note the application version must be 19C or greater.
 - You have a local (not federated) cloud userid.
