@@ -118,7 +118,7 @@
 
 ![](images/028.png)
 
-- Enter details up to the API key, then select generate, and then copy.
+- Enter details up to the API key, then select generate, and then copy.  Although you see the fingerprint of the key, when you hit the copy button it actually copies the public key in the background(confusing!) which is what you need.
 
 ![](images/029.png)
 
