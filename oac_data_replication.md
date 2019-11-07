@@ -136,9 +136,60 @@
 
 ![](images/033.png)
 
+- Create Replication Connection for you target database.  In this case we will target dbcs.
+
+![](images/035.png)
+
+- Save
+
+![](images/036.png)
+
 - Create a new Data Replication.
 
 ![](images/034.png)
 
+- Select your erp source.
 
+![](images/037.png)
 
+- Next select your dbcs target.
+
+![](images/038.png)
+
+- Select data store paths to better identify the object names you see in BICC.  Also note that if your developers have created custom fields and have created custom view objects you can select those here.
+
+![](images/039.png)
+
+- Select an object to replicate.  Note that you need be sure to **select the check box on the right**.  Also note that not all fields are selected by default.  If you wish all fields to be select then check the source check box.
+
+![](images/040.png)
+
+- Select `Run Replication Flow`.  Give the replication a name and select save and run.
+
+![](images/041.png)
+
+-  The job will take a few minutes to run.  When it is complete open the connection in SQL Developer (SQL Dev setup not shown here) to review the data.  THe job creates several tables in addition to the replication data.
+
+![](images/042.png)
+
+![](images/043.png)
+
+![](images/044.png)
+
+![](images/045.png)
+
+![](images/046.png)
+
+![](images/047.png)
+
+- Return to object storage to review the data that was stored from the job.
+
+![](images/048.png)
+
+![](images/049.png)
+
+- Compare this with the table that was replicated into DBCS.  Note the additional columns that were added by OAC to track process information.
+
+![](images/050.png)
+
+![](images/051.png)
