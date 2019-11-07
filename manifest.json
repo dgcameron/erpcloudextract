@@ -22,6 +22,13 @@
                 "title": "OAC Data Replication",
                 "description": "OAC Data Replication"
             }
+            ,
+            {
+                "number": "40",
+                "filename": "otbi_data_replication.md",
+                "title": "OTBI Data Replication",
+                "description": "OTBI Data Replication"
+            }
         ]
     }
 }

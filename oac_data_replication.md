@@ -5,7 +5,7 @@
 
 ### **Pre-requisites**
 
-- You have an ERP Cloud instance account that has the required priviledges to access bicc and create connections and replications (see link above for details)
+- You have an ERP Cloud instance account that has the required priviledges to access bicc and create connections and replications (see link above for details).  Note the application version must be 19C or greater.
 - You have created a target database (DBCS or ADW/ATP).
 - You have provisioned a Oracle Analytics Cloud (OAC) Service.
 - You have a local (not federated) cloud userid.
