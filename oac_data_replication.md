@@ -160,7 +160,7 @@
 
 ![](images/039.png)
 
-- Select an object to replicate.  Note that you need be sure to **select the check box on the right**.  Also note that not all fields are selected by default.  If you wish all fields to be select then check the source check box.
+- Select an object to replicate.  Note that you need be sure to **select the check box on the left**.  Also note that not all fields are selected by default.  If you wish all fields to be select then check the source check box.
 
 ![](images/040.png)
 
