@@ -15,6 +15,12 @@
                 "filename": "detail.md",
                 "title": "More Info",
                 "description": "More Info"
+            },
+            {
+                "number": "30",
+                "filename": "oac_data_replication.md",
+                "title": "OAC Data Replication",
+                "description": "OAC Data Replication"
             }
         ]
     }
