@@ -136,11 +136,11 @@
 
 ![](images/033.png)
 
-- Create Replication Connection for you target database.  In this case we will target dbcs.
+- Create Replication Connection for your target database.  In this case we will target dbcs.
 
 ![](images/035.png)
 
-- Save
+- Save.  Make sure the port (1521 in this case) is open in your network settings.  If you are replicating to ADW this is not necessary, but you would need the wallet.
 
 ![](images/036.png)
 
