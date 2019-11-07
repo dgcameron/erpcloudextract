@@ -1,4 +1,4 @@
-### **ERP Cloud REST APIs**
+# **ERP Cloud REST APIs**
 
 [REST API for Oracle Financials Cloud](https://docs.oracle.com/en/cloud/saas/financials/19d/farfa/rest-endpoints.html)
 
@@ -8,13 +8,13 @@ REST APIs can retrieve content from the applications using 'GET' requests.  The 
 
 After making your REST call to fetch the JSON formated data, you can load into a database target as follows:
 
-- [ADW](https://blogs.oracle.com/datawarehousing/loading-your-object-store-data-into-autonomous-database)
+- [**ADW**](https://blogs.oracle.com/datawarehousing/loading-your-object-store-data-into-autonomous-database)
     - Upload to Object Storage
     - Create a new table to load the data into.  This is a JSON document store (BLOB). 
     - Optionally create a second standard table for validated JSON data (less processing, faster).
     - Execute DBMS_CLOUD.COPY_DATA to load the JSON data into the JSON table.
     - Optionally load the standard table from the JSON table.
-- [DBCS](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/adjsn/loading-external-json-data.html#GUID-52EFC452-5E65-4148-8070-1FA588A6E697)
+- [**DBCS**](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/adjsn/loading-external-json-data.html#GUID-52EFC452-5E65-4148-8070-1FA588A6E697)
     - Upload to the DBCS VM (scp).
     - Create a new external table that will be used to query the JSON document on the file system.
     - Create a second standard table for validated JSON data (less processing, faster).
