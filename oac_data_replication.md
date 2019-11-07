@@ -193,3 +193,9 @@
 ![](images/050.png)
 
 ![](images/051.png)
+
+#### **Some Things to Note:**
+
+- Replications can be full or incremental.
+- Options can include deletions.
+- Various row and data limits apply for data sources and reports, and for DV, Business Intelligence, and Essbase Services.  For data sources row limits are 125k for 1 OCPU up to 2.2M for 16+ OCPU.  See the OCC link above for details (plan your service section).
