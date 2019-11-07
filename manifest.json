@@ -30,7 +30,7 @@
             },
             {
                 "number": "50",
-                "filename": "resetapi_data_replication.md",
+                "filename": "restapi_data_replication.md",
                 "title": "REST API Data Replication",
                 "description": "REST API Data Replication"
             }
