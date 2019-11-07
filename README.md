@@ -18,7 +18,7 @@ This provides an overview of the options available to extract data from ERP Clou
 - [**Oracle Analytics Cloud (OAC) Data Replication**](oac_data_replication.md):
     - Simplest overall process if the objective is to use OAC against a DBCS or ADW target.
     - Has some data volume limits.
-- Oracle Integration Cloud (OIC):
+- **Oracle Integration Cloud (OIC)**:
     - Bulk extract possible with limitations, but not recommended.
 - [**ERP Cloud REST APIs**](restapip_data_replication.md): 
     - Has data volume limits.
