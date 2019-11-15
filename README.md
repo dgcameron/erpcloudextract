@@ -9,12 +9,15 @@ This provides an overview of the options available to extract data from ERP Clou
 
 ### **Options in Recommended Order (Depends Partly on Use Case):**
 
-- [**BI Cloud Connector (BICC)**](bicc_data_replication.md) (recommended):
-    - No data volume limits
-    - BICC Loads data to Object Storage with scheduled jobs.  From there you have choices to load into targets:
-        - Oracle Data Integrator (ODI).  ODI can manage the BICC source and DBCS/ADW targets, and orchestrate the movement of data from BICC to Object Storage and from there to your target.  This is the recommended tool.
+- [**Oracle Data Integrator (ODI) with BI Cloud Connector (BICC)**](odi.md) (recommended):
+    - No data volume limits.
+    - Oracle Data Integrator (ODI).  ODI can manage the BICC source and DBCS/ADW targets, and orchestrate the movement of data from BICC to Object Storage and from there to your target.  This is the recommended tool.
+- [**BI Cloud Connector (BICC)**](bicc_data_replication.md):
+    - No data volume limits.
+    - BICC Loads data to Object Storage with scheduled jobs.  From there you have choices to load into targets (in addition to using ODI noted above):
         - Datasync:  As an alternative to using ODI you can also replicate (via BICC) data from BICC to Object Storage and from there to your target.  Data Sync is not supported
         - Scripting:  Yet another alternative is to move data from Object Storage to DBCS or ADW via scripted methods (OCI API tool with External Tables).
+- **BI Publisher** - Not documented here.
 - [**Oracle Analytics Cloud (OAC) Data Replication**](oac_data_replication.md):
     - Simplest overall process if the objective is to use OAC against a DBCS or ADW target.
     - Has some data volume limits.
