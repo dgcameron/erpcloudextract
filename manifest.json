@@ -17,6 +17,12 @@
                 "description": "BI Cloud Connector"
             },
             {
+                "number": "25",
+                "filename": "odi.md",
+                "title": "ODI With BI Cloud Connector",
+                "description": "ODI With BI Cloud Connector"
+            },
+            {
                 "number": "30",
                 "filename": "oac_data_replication.md",
                 "title": "OAC Data Replication",
