@@ -5,6 +5,8 @@ Oct 30, 2019
 
 ## **DRAFT!**
 
+[Here](Archtecture Options for Fusion Data Extraction.pptx) is a presentation put together by Martha Aguilar that summarizes the options.  Note that this document is not fully integrated with the presentation and there may be some inconsistencies in the options noted below and the presentation.
+
 This provides an overview of the options available to extract data from ERP Cloud for loading into a database or analytic platform such as OAC.  The extraction of data from ERP cloud involves a few steps, and for each step there are some choices.  The initial extract can be done one of the following ways, although some of these options are not recommended but included for completeness. Links to more detail are in the options below, and you can also navigate directly to these by clicking on the icon in the upper left. 
 
 ### **Options in Recommended Order (Depends Partly on Use Case):**
