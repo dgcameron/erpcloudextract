@@ -111,3 +111,83 @@ Note the current V2 version of the Marketplace Image is missing the reverse engi
 
 ![](images/087.png)
 
+- Right click on your new data server and create a new physical schema.
+
+![](images/093.png)
+
+- Then select the schema from ERP Cloud that has the View Objects (VOs) you want to replicate.  Save your work.
+
+![](images/094.png)
+
+- Upload your ADW wallet to the ODI Marketplace Image (not shown here).
+
+- Navigate to Oracle Technology and create a new Data Server (right click).  Enter a name, the admin userid and password on ADW, and you should be able to select your Credential File (the wallet).  In my case I entered details in the jdbc connection manually by opening the wallet zip file and copying the entry from the tnsnames.ora file.  If you chose this method you also need to enter two keys, one with the location of wallet (in my case /tmp/wallet).
+
+![](images/088.png)
+
+![](images/089.png)
+
+- Save your work and test connection.
+
+![](images/090.png)
+
+![](images/091.png)
+
+### **Designer - Create Models, a Project and a Mapping (source to target):**
+
+- Navigate to Designer and Create a new model.
+
+![](images/092.png)
+
+- Enter details.
+
+![](images/095.png)
+
+- Select Reverse Engineer and consider filtering (there are a large number of objects).  In my case I am interested in COGSDistributionsPVO.  Be sure to set your `LIST_OF_OFFERINGS`.
+
+![](images/096.png)
+
+- You should see the objects you selected available in your model.
+
+![](images/097.png)
+
+- Select Create new model and topology objects.
+
+![](images/098.png)
+
+![](images/099.png)
+
+- Save your new model.
+
+![](images/100.png)
+
+- Create new diagram for bicc_adm model (target).  Right click on Diagrams.
+
+![](images/101.png)
+
+- Drag the objects (one by one) from the bicc_fscm model (source) to your target.  This will simplify setup.
+
+![](images/102.png)
+
+- Then save.
+
+![](images/103.png)
+
+- Create a new project 
+
+![](images/104.png)
+
+- Patch ODI with the BICC RKM.  Call it bicc.  Upload and copy the `KM_RKM Oracle BI Cloud Connector.xml` file to `\home\oracle\odi\sdk\xml-reference` directory.
+
+- Expand the `Knowledge Modules` section and right click on the `Reverse-Engineering (RKM) module` to import the RKM.
+
+![](images/105.png)
+
+![](images/106.png)
+
+- Search for the BI Cloud Connector RKM and select it.
+
+![](images/107.png)
+
+![](images/108.png)
+
