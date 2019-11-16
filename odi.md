@@ -191,3 +191,34 @@ Note the current V2 version of the Marketplace Image is missing the reverse engi
 
 ![](images/108.png)
 
+- Right click on the object in the target model that you with to replicate and select `Generate Mappings IN`.
+
+![](images/109.png)
+
+- Set Generation Folder.
+
+![](images/110.png)
+
+- Select the Physical Tab.
+
+![](images/111.png)
+
+- Select the target object and set the `CREATE_TARGET_TABLE` to True.
+
+![](images/112.png)
+
+- Select the staging object and set the `SUBMIT_BICC_JOB` and `CREATE_CREDENTIAL` variables to True.
+
+![](images/113.png)
+
+- Save your work.
+
+![](images/114.png)
+
+### **Run the Mapping**
+
+- Run the mapping.  This will take several minutes, and will first run a BICC job that creates objects in Object Storage, then will create your external table in ADW and your physical table in ADW, and the the credential required to copy the data from Object Storage.
+
+![](images/115.png)
+
+![](images/116.png)
