@@ -211,3 +211,22 @@ OAC Extract Time: 100 seconds
 OAC Load to DBCS: Over 3 hours (load is committed in batches of 2000 records, each taking about 54 seconds - extremely slow)
 
 While not tested, an alternative approach that SCP's the csv file to DBCS, and then loads into a table using external tables should take not more than five minutes.
+
+Data Replication does not support multiple parallel writes loading a given table. However, up to 5 tables can be replicated in parallel per source type.
+
+ Beside replicating data, Following features are supported:
+- Unique Constraints  / Indexes are created on the table with Primary Key Columns, which help improve performance of merge data during incremental loads.
+- Incremental loads
+- For Fusion sources, Records deleted from source are processed using either
+    - Soft delete
+    - Hard delete
+- Error handling : All records with data errors are loaded in the Error tables. Rest of the records loaded into the replicated table.
+- Error correction: For certain type of data errors, Records are corrected and re-inserted in the replicated table
+    - Duplicate Records
+    - Records where the data/text size is greater than the defined column size, data is trimmed and reloaded into replicated table.
+- CDC (Change Data Capture) columns are added to each replicated table to indicate the Last Replication Date, DML_Code (I/U/D) and Load Process ID (Replication Job ID) to identify the records.
+- Retry connections on both Source and Target Connections are supported
+- Load state maintained and Restart from failure handled, all previously extracted files are replicated first and followed by current job extraction.
+- Error Summary and Replication summary provided (Records extracted / duration, loaded / duration, rejected, corrected , etc.)
+- Supportive indexes created on CDC columns to help downstream systems fetch the incremental loads.
+- Metadata of Custom / Extension attributes including labels in different languages loaded, for certain sources.
