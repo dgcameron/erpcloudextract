@@ -1,9 +1,7 @@
 # Options for Extracting Data Out of ERP Cloud and Optionally Loading into Oracle Analytics Cloud
 
 Derrick Cameron
-Oct 30, 2019
-
-## **DRAFT!**
+Nov 19, 2019
 
 [Here](Architecture_Options_for_Fusion_Data_Extraction.pptx) is a presentation that summarizes the options.  Note that this document is not fully integrated with the presentation and there may be some inconsistencies in the options noted below and the presentation.
 
