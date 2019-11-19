@@ -19,7 +19,8 @@ This provides an overview of thKTe options available to extract data from ERP Cl
     - BICC Loads data to Object Storage with scheduled jobs.  From there you have choices to load into targets (in addition to using ODI noted above):
         - Datasync:  As an alternative to using ODI you can also replicate (via BICC) data from BICC to Object Storage and from there to your target.  Data Sync is not supported
         - Scripting:  Yet another alternative is to move data from Object Storage to DBCS or ADW via scripted methods (OCI API tool with External Tables).
-- **BI Publisher** - Not documented here.
+- [**BI Publisher**](bpd.md):
+    - Should only be used if you require information that is not available in the View Objects in BICC (very little is not available).
 - [**Oracle Analytics Cloud (OAC) Data Replication**](oac_data_replication.md):
     - Simplest overall process if the objective is to use OAC against a DBCS or ADW target.
     - Has some data volume limits.
