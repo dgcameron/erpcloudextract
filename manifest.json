@@ -12,33 +12,39 @@
             },
             {
                 "number": "20",
-                "filename": "bicc_data_replication.md",
+                "filename": "bicc.md",
                 "title": "BI Cloud Connector",
-                "description": "BI Cloud Connector"
+                "description": "BI Cloud Connector Replication Steps"
             },
             {
                 "number": "25",
                 "filename": "odi.md",
                 "title": "ODI With BI Cloud Connector",
-                "description": "ODI With BI Cloud Connector"
+                "description": "ODI With BI Cloud Connector Replication Steps"
             },
             {
                 "number": "30",
-                "filename": "oac_data_replication.md",
+                "filename": "oac.md",
                 "title": "OAC Data Replication",
-                "description": "OAC Data Replication"
+                "description": "OAC Data Replication Steps"
+            },
+            {
+                "number": "35",
+                "filename": "bip.md",
+                "title": "BI Publisher Data Replication",
+                "description": "BI Publisher Data Replication Steps"
             },
             {
                 "number": "40",
-                "filename": "otbi_data_replication.md",
+                "filename": "otbi.md",
                 "title": "OTBI Data Replication",
-                "description": "OTBI Data Replication"
+                "description": "OTBI Data Replication Steps"
             },
             {
                 "number": "50",
-                "filename": "restapi_data_replication.md",
+                "filename": "restapi.md",
                 "title": "REST API Data Replication",
-                "description": "REST API Data Replication"
+                "description": "REST API Data Replication Steps"
             }
         ]
     }
