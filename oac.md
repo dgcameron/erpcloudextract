@@ -201,15 +201,6 @@
 - Options can include deletions.
 - Various row and data limits apply for data sources and reports, and for DV, Business Intelligence, and Essbase Services.  These limits relate to querying, exporting, and visualizing data (reporting) and not to replication limits.  However in a test load the following was observed:
 
-Data Table: FSCM_COST_DISTRIBUTIONS
-Rows: 508292
-zip file in Object Storage: 25.7MB
-csv file: 710MB
-
-BICC Extract Time: 241 seconds
-OAC Extract Time: 100 seconds
-OAC Load to DBCS: Over 3 hours (load is committed in batches of 2000 records, each taking about 54 seconds - extremely slow)
-
 While not tested, an alternative approach that SCP's the csv file to DBCS, and then loads into a table using external tables should take not more than five minutes.
 
 Data Replication does not support multiple parallel writes loading a given table. However, up to 5 tables can be replicated in parallel per source type.
