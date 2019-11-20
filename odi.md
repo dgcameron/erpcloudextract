@@ -1,6 +1,6 @@
 # **Replicate Data using Oracle Data Integrator With BICC**
 
-Note:  Thanks to Martha Aguilar for her help with setup!
+Note:  Thanks to Martha Aguilar for her help with setup!  These instructions were developed over several days and used different compartments.  Generally you would put everything in one compartment, but this is not required.  There is some inconsistency in the instructions about which compartments are used, but it shouldn't matter where you put services as long as you know where you put them :).
 
 Note the current V2 version of the Marketplace Image is missing the reverse engineering knowledge Module (RKM) for BICC.  You can [right click on this link to download it](./KM_RKM Oracle BI Cloud Connector.xml).
 
@@ -10,7 +10,7 @@ Note the current V2 version of the Marketplace Image is missing the reverse engi
 - You have a local (not federated) cloud userid.  In this case I am using `api3_user`.
 - You have created a connection to object storage in BICC (see the previous option for setup).
 - You have created an OCI bucket in your tenancy.
-- You have capacity for a 2.4 shape (see menu Governance - Limits).
+- You have capacity for a 2.4 shape, see OCI menu Governance > Limits, Quotas and Usage.  Check to see you have an available 2.4 shape.
 - You have a public/private pem key added to the local user, with the token in hand.
 
 ### **Deploy the ODI Marketplace Image**
