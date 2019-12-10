@@ -38,3 +38,8 @@ This provides an overview of thKTe options available to extract data from ERP Cl
 - **Costs:**  Different options use different services, and these may differ depending on your choices.  While not covered in this document this is something that must be estimated and factored into architecture decisions.
 - **Support:**  Not all the options above are supported, and depending on the use case may not be recommended.  Unsupported options are noted in the option details.
 - **Data Volume:**  Different options support different volume limits.  This is noted in the option details above.
+
+### **Demo Recordings**
+
+- [**Replication with ODI**](odi.mp4)
+- [**Replication with OAC**](oac.mp4)
