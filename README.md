@@ -41,5 +41,5 @@ This provides an overview of thKTe options available to extract data from ERP Cl
 
 ### **Demo Recordings**
 
-- [**Replication with ODI**](odi.mp4)
-- [**Replication with OAC**](oac.mp4)
+- [Replication with ODI](odi.mp4)
+- [Replication with OAC](oac.mp4)
