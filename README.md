@@ -9,7 +9,7 @@ This provides an overview of thKTe options available to extract data from ERP Cl
 
 ### **Options in Recommended Order (Depends Partly on Use Case):**
 
-- [**Oracle Data Integrator (ODI) with BI Cloud Connector (BICC)**](odi.md) (recommended):
+- [**Oracle Data Integrator (ODI) with BI Cloud Connector (BICC)**](https://dgcameron.github.io/erpcloudextract/?page=README.md&nav=open&lab=bicc) (recommended):
     - No data volume limits.
     - Oracle Data Integrator (ODI).  ODI can manage the BICC source and DBCS/ADW targets, and orchestrate the movement of data from BICC to Object Storage and from there to your target.  This is the recommended tool.
 - [**BI Cloud Connector (BICC)**](bicc_data_replication.md):
