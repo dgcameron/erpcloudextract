@@ -9,24 +9,24 @@ This provides an overview of thKTe options available to extract data from ERP Cl
 
 ### **Options in Recommended Order (Depends Partly on Use Case):**
 
-- [**Oracle Data Integrator (ODI) with BI Cloud Connector (BICC)**](https://dgcameron.github.io/erpcloudextract/?page=README.md&nav=open&lab=bicc) (recommended):
+- [**Oracle Data Integrator (ODI) with BI Cloud Connector (BICC)**](https://dgcameron.github.io/erpcloudextract/?page=README.md&nav=open&lab=odi) (recommended):
     - No data volume limits.
     - Oracle Data Integrator (ODI).  ODI can manage the BICC source and DBCS/ADW targets, and orchestrate the movement of data from BICC to Object Storage and from there to your target.  This is the recommended tool.
-- [**BI Cloud Connector (BICC)**](bicc_data_replication.md):
+- [**BI Cloud Connector (BICC)**](https://dgcameron.github.io/erpcloudextract/?page=README.md&nav=open&lab=bicc):
     - No data volume limits.
     - BICC Loads data to Object Storage with scheduled jobs.  From there you have choices to load into targets (in addition to using ODI noted above):
         - Datasync:  As an alternative to using ODI you can also replicate (via BICC) data from BICC to Object Storage and from there to your target.  Data Sync is not supported
         - Scripting:  Yet another alternative is to move data from Object Storage to DBCS or ADW via scripted methods (OCI API tool with External Tables).
-- [**BI Publisher**](bpd.md):
+- [**BI Publisher**](https://dgcameron.github.io/erpcloudextract/?page=README.md&nav=open&lab=bip):
     - Should only be used if you require information that is not available in the View Objects in BICC (very little is not available).
-- [**Oracle Analytics Cloud (OAC) Data Replication**](oac_data_replication.md):
+- [**Oracle Analytics Cloud (OAC) Data Replication**](https://dgcameron.github.io/erpcloudextract/?page=README.md&nav=open&lab=oac):
     - Simplest overall process if the objective is to use OAC against a DBCS or ADW target.
     - Has some data volume limits.
 - **Oracle Integration Cloud (OIC)**:
     - Bulk extract possible with limitations, but not recommended, and is not discussed in this document.
-- [**ERP Cloud REST APIs**](restapip_data_replication.md): 
+- [**ERP Cloud REST APIs**](https://dgcameron.github.io/erpcloudextract/?page=README.md&nav=open&lab=restapi): 
     - Has data volume limits.
-- [**OTBI Reports**](otbi_data_replication.md):
+- [**OTBI Reports**](https://dgcameron.github.io/erpcloudextract/?page=README.md&nav=open&lab=otbi):
     - Has data volume limits.
     - Export data to csv files on your desktop, after which you need to load into your database target.
 
