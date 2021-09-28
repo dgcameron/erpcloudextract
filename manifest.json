@@ -1,0 +1,42 @@
+{
+    "workshoptitle": "Oracle ERP Cloud Extract Options",
+    "help": "",
+    "include": {
+        "import": "../../common/import_notebook.md"
+    },
+    "tutorials": [
+        {
+            "title": "Options",
+            "filename": "README.md"
+        },
+        {
+			"title": "BI Cloud Connector",
+			"filename": "bicc.md"
+        },
+		{
+		    "title": "ODI With BI Cloud Connector",
+            "filename": "odi.md"
+        },
+        {
+		    "title": "OAC Data Replication",
+            "filename": "oac.md"
+        },
+        {
+		    "title": "BI Publisher Data Replication",
+            "filename": "bip.md"
+        },
+        {
+		    "title": "OTBI Data Replication",
+            "filename": "otbi.md"
+        },
+	    {
+            "filename": "restapi.md",
+			"title": "REST API Data Replication"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename":"https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}
